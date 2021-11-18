@@ -1,5 +1,4 @@
 from typing import List, Optional
-from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy  # type: ignore
 
 db = SQLAlchemy()
@@ -13,7 +12,6 @@ class GameEntity(db.Model):  # type: ignore
     winner = db.Column(db.Integer, nullable=True)
     activePlayer = db.Column(db.Integer, nullable=False)
     board = db.Column(db.String(42), nullable=False)
-    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __init__(
         self,
@@ -39,7 +37,6 @@ class PlayerEntity(db.Model):  # type: ignore
         db.ForeignKey('game.gameId'),
         nullable=False)
     number = db.Column(db.Integer, nullable=False)
-    created = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     __table_args__ = (
         db.UniqueConstraint(
