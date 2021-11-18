@@ -4,6 +4,7 @@ from typing import List, Optional
 
 # Models
 
+
 class Player(IntEnum):
     ONE = 1
     TWO = 2

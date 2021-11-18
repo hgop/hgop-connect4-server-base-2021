@@ -7,6 +7,7 @@ from connect4 import models
 from connect4 import tokens
 from typing import Any, Tuple
 
+
 def index() -> Tuple[str, int]:
     return "Game Server", 200
 
@@ -20,10 +21,11 @@ def create_game(json: Any) -> Tuple[dict, int]:
 
     gameId = tokens.generate_token(32)
 
-    gameActive=True
-    gameWinner=None
-    gameActivePlayer=1
-    gameBoard="000000" + "000000" + "000000" + "000000" + "000000" + "000000" + "000000"
+    gameActive = True
+    gameWinner = None
+    gameActivePlayer = 1
+    gameBoard = "000000" + "000000" + "000000" + \
+        "000000" + "000000" + "000000" + "000000"
 
     game = database.create_game(
         gameId=gameId,
@@ -36,7 +38,10 @@ def create_game(json: Any) -> Tuple[dict, int]:
     playerId = tokens.generate_token(32)
     playerNumber = 1
 
-    database.add_player_to_game(playerId=playerId, gameId=gameId, number=playerNumber)
+    database.add_player_to_game(
+        playerId=playerId,
+        gameId=gameId,
+        number=playerNumber)
 
     return models.CreateGameResponse(
         gameId=gameId,
@@ -49,6 +54,7 @@ def create_game(json: Any) -> Tuple[dict, int]:
         board=converter.str_to_board(gameBoard),
         created=game.created,
     ).to_json(), 201
+
 
 def join_game(json: Any) -> Tuple[dict, int]:
     req = models.JoinGameRequest(json)
@@ -64,7 +70,10 @@ def join_game(json: Any) -> Tuple[dict, int]:
     playerId = tokens.generate_token(32)
     playerNumber = len(players) + 1
 
-    database.add_player_to_game(playerId=playerId, gameId=game.gameId, number=playerNumber)
+    database.add_player_to_game(
+        playerId=playerId,
+        gameId=game.gameId,
+        number=playerNumber)
 
     return models.JoinGameResponse(
         gameId=game.gameId,
@@ -77,6 +86,7 @@ def join_game(json: Any) -> Tuple[dict, int]:
         board=converter.str_to_board(game.board),
         created=game.created,
     ).to_json(), 202
+
 
 def get_game(gameId: str, playerId: str) -> Tuple[dict, int]:
     game = database.get_game(gameId)
@@ -128,7 +138,7 @@ def make_move(json: Any) -> Tuple[dict, int]:
         board=converter.str_to_board(game.board),
     )
 
-    if state.active == False:
+    if not state.active:
         raise exceptions.ApiException("Game is over", 403)
 
     if game_logic.is_column_full(state, req.column):

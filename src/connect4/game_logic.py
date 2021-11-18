@@ -31,7 +31,11 @@ def make_move(game: models.Game, x: int) -> models.Game:
     raise Exception("Row is full")
 
 
-def is_victory_move(game: models.Game, x: int, y: int, player: models.Player) -> bool:
+def is_victory_move(
+        game: models.Game,
+        x: int,
+        y: int,
+        player: models.Player) -> bool:
     return (
         is_victory_move_horizontal(game, x, y, player)
         or is_victory_move_vertical(game, x, y, player)
@@ -62,7 +66,7 @@ def is_victory_move_diagonal(
 
 def get_tile(game: models.Game, x: int, y: int) -> models.Tile:
     # TODO
-    return False
+    return models.Tile.EMPTY
 
 
 def is_board_full(game: models.Game) -> bool:
