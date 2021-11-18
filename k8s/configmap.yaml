@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: connect4-server
+  labels:
+    app: connect4-server
+data:
+  HOST: "0.0.0.0"
+  PORT: "3000"
+  DEBUG: "False"
+  TESTING: "False"
+  DATABASE_NAME: "connect4"
+  DATABASE_HOST: "connect4-database"
+  DATABASE_PORT: "5432"
+  CSRF_ENABLED: "True"

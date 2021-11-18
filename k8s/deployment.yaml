@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: connect4-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: connect4-server
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: connect4-server
+        version: v1
+    spec:
+      containers:
+      - image: ironpeak/connect4-server:{{IMAGE_TAG}}
+        imagePullPolicy: Always
+        name: connect4-server
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - configMapRef:
+            name: connect4-server
+        - secretRef:
+            name: connect4-server
