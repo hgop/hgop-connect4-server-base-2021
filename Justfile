@@ -7,6 +7,3 @@ install:
 
 mypy:
     mypy ./src/connect4/
-
-pylint:
-    pylint ./src/connect4/

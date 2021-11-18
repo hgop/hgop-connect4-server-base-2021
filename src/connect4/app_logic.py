@@ -1,11 +1,10 @@
-from connect4 import config
+from typing import Any, Tuple
 from connect4 import converter
 from connect4 import database
 from connect4 import exceptions
 from connect4 import game_logic
 from connect4 import models
 from connect4 import tokens
-from typing import Any, Tuple
 
 
 def index() -> Tuple[str, int]:

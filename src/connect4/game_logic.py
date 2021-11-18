@@ -1,6 +1,6 @@
+from copy import deepcopy
 from connect4 import converter
 from connect4 import models
-from copy import deepcopy
 
 
 def make_move(game: models.Game, x: int) -> models.Game:
@@ -19,7 +19,7 @@ def make_move(game: models.Game, x: int) -> models.Game:
                 result.winner = result.activePlayer
                 result.active = False
             else:
-                result.active = is_board_full(result) == False
+                result.active = is_board_full(result) is False
 
             if result.activePlayer == models.Player.ONE:
                 result.activePlayer = models.Player.TWO

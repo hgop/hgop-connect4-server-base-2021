@@ -4,6 +4,7 @@ from flask_sqlalchemy import SQLAlchemy  # type: ignore
 
 db = SQLAlchemy()
 
+
 class GameEntity(db.Model):  # type: ignore
     __tablename__ = 'game'
 

@@ -1,7 +1,8 @@
 from flask import Flask, request
-from connect4 import exceptions
 from typing import Any, Callable, Tuple
+from connect4 import exceptions
 from connect4 import app_logic
+
 
 def call_wrapper(action: Callable[[], Tuple[Any, int]]) -> Tuple[Any, int]:
     try:
@@ -17,20 +18,15 @@ def call_wrapper(action: Callable[[], Tuple[Any, int]]) -> Tuple[Any, int]:
             "error": "Internal Server Error",
         }, 500
 
+
 def register(app: Flask):
     @app.route("/", methods=["GET"])
     def index() -> Tuple[str, int]:
-        return call_wrapper(
-            lambda: app_logic.index()
-        )
-
+        return call_wrapper(app_logic.index)
 
     @app.route("/status", methods=["GET"])
     def status() -> Tuple[str, int]:
-        return call_wrapper(
-            lambda: app_logic.status()
-        )
-
+        return call_wrapper(app_logic.status)
 
     @app.route("/create_game", methods=["POST"])
     def create_game() -> Tuple[dict, int]:
@@ -38,13 +34,11 @@ def register(app: Flask):
             lambda: app_logic.create_game(request.json)
         )
 
-
     @app.route("/join_game", methods=["POST"])
     def join_game() -> Tuple[dict, int]:
         return call_wrapper(
             lambda: app_logic.join_game(request.json)
         )
-
 
     @app.route("/get_game", methods=["GET"])
     def get_game() -> Tuple[dict, int]:
@@ -53,7 +47,6 @@ def register(app: Flask):
         return call_wrapper(
             lambda: app_logic.get_game(gameId, playerId)
         )
-
 
     @app.route("/make_move", methods=["POST"])
     def make_move() -> Tuple[dict, int]:
