@@ -4,7 +4,7 @@ set -euo pipefail
 
 if [ "$#" -ne 1 ]; then
     echo "Invalid number of arguments"
-    echo "./scripts/deploy.sh <NAMESPACE>"
+    echo "./scripts/create_database.sh <NAMESPACE>"
     exit 1
 fi
 
