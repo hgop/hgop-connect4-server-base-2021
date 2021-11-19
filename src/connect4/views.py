@@ -13,11 +13,6 @@ def register(app: Flask):
             return {
                 "error": ex.message,
             }, ex.status_code
-        except Exception as ex:
-            app.logger.error(ex)
-            return {
-                "error": "Internal Server Error",
-            }, 500
 
     @app.route("/", methods=["GET"])
     def index() -> Tuple[str, int]:
