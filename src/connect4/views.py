@@ -4,22 +4,21 @@ from connect4 import exceptions
 from connect4 import app_logic
 
 
-def call_wrapper(action: Callable[[], Tuple[Any, int]]) -> Tuple[Any, int]:
-    try:
-        return action()
-    except exceptions.ApiException as ex:
-        print(ex)
-        return {
-            "error": ex.message,
-        }, ex.status_code
-    except Exception as ex:
-        print(ex)
-        return {
-            "error": "Internal Server Error",
-        }, 500
-
-
 def register(app: Flask):
+    def call_wrapper(action: Callable[[], Tuple[Any, int]]) -> Tuple[Any, int]:
+        try:
+            return action()
+        except exceptions.ApiException as ex:
+            app.logger.error(ex)
+            return {
+                "error": ex.message,
+            }, ex.status_code
+        except Exception as ex:
+            app.logger.error(ex)
+            return {
+                "error": "Internal Server Error",
+            }, 500
+
     @app.route("/", methods=["GET"])
     def index() -> Tuple[str, int]:
         return call_wrapper(app_logic.index)
