@@ -41,8 +41,8 @@ def register(app: Flask):
 
     @app.route("/get_game", methods=["GET"])
     def get_game() -> Tuple[dict, int]:
-        gameId = request.args.get("gameId", "")
-        playerId = request.args.get("playerId", "")
+        gameId = request.args.get("gameId")
+        playerId = request.args.get("playerId")
         return call_wrapper(
             lambda: app_logic.get_game(gameId, playerId)
         )

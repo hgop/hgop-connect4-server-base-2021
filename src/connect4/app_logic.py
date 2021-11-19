@@ -51,7 +51,6 @@ def create_game(json: Any) -> Tuple[dict, int]:
         activePlayer=converter.int_to_player(gameActivePlayer),
         playerCount=1,
         board=converter.str_to_board(gameBoard),
-        created=game.created,
     ).to_json(), 201
 
 
@@ -83,7 +82,6 @@ def join_game(json: Any) -> Tuple[dict, int]:
         activePlayer=converter.int_to_player(game.activePlayer),
         playerCount=2,
         board=converter.str_to_board(game.board),
-        created=game.created,
     ).to_json(), 202
 
 
@@ -107,7 +105,6 @@ def get_game(gameId: str, playerId: str) -> Tuple[dict, int]:
         activePlayer=converter.int_to_player(game.activePlayer),
         playerCount=len(players),
         board=converter.str_to_board(game.board),
-        created=game.created,
     ).to_json(), 200
 
 
@@ -162,5 +159,4 @@ def make_move(json: Any) -> Tuple[dict, int]:
         activePlayer=state.activePlayer,
         playerCount=len(players),
         board=state.board,
-        created=game.created,
     ).to_json(), 202

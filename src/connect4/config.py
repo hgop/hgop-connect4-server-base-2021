@@ -14,4 +14,5 @@ DATABASE_PORT = int(os.getenv("DATABASE_PORT", "5432"))
 
 SQLALCHEMY_DATABASE_URI = f"postgresql://{DATABASE_USERNAME}:{DATABASE_PASSWORD}@{DATABASE_HOST}:{DATABASE_PORT}/{DATABASE_NAME}"
 
+CSRF_ENABLED = bool(os.getenv("CSRF_ENABLED", "False"))
 SECRET_KEY = os.getenv("SECRET_KEY", "this-really-needs-to-be-changed")

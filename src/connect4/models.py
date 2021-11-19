@@ -50,7 +50,6 @@ class BaseGameResponse:
     activePlayer: Player
     playerCount: int
     board: List[List[Tile]]
-    created: datetime
 
     def __init__(
         self,
@@ -61,8 +60,7 @@ class BaseGameResponse:
         playerNumber: Player,
         activePlayer: Player,
         playerCount: int,
-        board: List[List[Tile]],
-        created: datetime
+        board: List[List[Tile]]
     ) -> None:
         self.gameId = gameId
         self.active = active
@@ -72,7 +70,6 @@ class BaseGameResponse:
         self.activePlayer = activePlayer
         self.playerCount = playerCount
         self.board = board
-        self.created = created
 
     def to_json(self) -> dict:
         return self.__dict__
