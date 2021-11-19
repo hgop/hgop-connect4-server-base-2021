@@ -87,7 +87,7 @@ def get_players(gameId: str) -> List[PlayerEntity]:
 
 
 def get_player(playerId: str) -> Optional[PlayerEntity]:
-    return PlayerEntity.query.get(playerId=playerId)
+    return PlayerEntity.query.get(playerId)
 
 
 def update_game(
