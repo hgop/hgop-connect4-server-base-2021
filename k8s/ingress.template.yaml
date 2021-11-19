@@ -1,8 +1,14 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: connect4-server
+  name: connect4-server  
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt"
 spec:
+  tls:
+  - hosts:
+    - "connect4-server.dreamteam.hgopteam.com"
+    secretName: connect4-server-tls
   rules:
   - host: "connect4-server.dreamteam.hgopteam.com"
     http:
