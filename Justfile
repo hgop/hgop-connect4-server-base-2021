@@ -13,7 +13,7 @@ install:
     pip install -r requirements_dev.txt
 
 mypy:
-    mypy ./src/connect4/
+    mypy ./src/
 
 start:
 	docker-compose down
