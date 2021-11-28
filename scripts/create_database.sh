@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-if [ "$#" -ne 2 ]; then
+if [ "$#" -ne 1 ]; then
     echo "Invalid number of arguments"
-    echo "./scripts/create_database.sh <NAMESPACE> <ENVIRONMENT>"
+    echo "./scripts/create_database.sh <NAMESPACE>"
     exit 1
 fi
 
@@ -19,7 +19,6 @@ if [[ -z "${DATABASE_PASSWORD}" ]]; then
 fi
 
 NAMESPACE="$1"
-ENVIRONMENT="$2"
 
 DATABASE_USERNAME_BASE64="$(echo -n "${DATABASE_USERNAME}" | base64)"
 DATABASE_PASSWORD_BASE64="$(echo -n "${DATABASE_PASSWORD}" | base64)"
@@ -73,12 +72,12 @@ spec:
       volumes:
       - name: connect4-database
         persistentVolumeClaim:
-          claimName: connect4-database-${ENVIRONMENT}
+          claimName: connect4-database
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: connect4-database-${ENVIRONMENT}
+  name: connect4-database
 spec:
   storageClassName: microk8s-hostpath
   capacity:
