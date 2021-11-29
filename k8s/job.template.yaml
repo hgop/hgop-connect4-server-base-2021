@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
       - name: connect4-migrations
-        image: ironpeak/connect4-server:{{IMAGE_TAG}}
+        image: [YOUR_USERNAME]/connect4-server:{{IMAGE_TAG}}
         command: ["flask", "db", "upgrade"]
         envFrom:
         - configMapRef:
