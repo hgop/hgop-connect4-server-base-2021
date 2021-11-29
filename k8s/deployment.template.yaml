@@ -17,7 +17,7 @@ spec:
         version: v1
     spec:
       containers:
-      - image: ironpeak/connect4-server:{{IMAGE_TAG}}
+      - image: [YOUR_USERNAME]/connect4-server:{{IMAGE_TAG}}
         imagePullPolicy: Always
         name: connect4-server
         ports:
